@@ -3,7 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/TUSHAR PERSONAL/Kotlin/Projects/RecipeCreator/app/src/main/res/layout/activity_create_or_edit_recipe.xml" value="0.15307971014492755" />
         <entry key="..\:/TUSHAR PERSONAL/Kotlin/Projects/RecipeCreator/app/src/main/res/layout/activity_main.xml" value="0.15307971014492755" />
+        <entry key="..\:/TUSHAR PERSONAL/Kotlin/Projects/RecipeCreator/app/src/main/res/layout/activity_view_recipes.xml" value="0.15307971014492755" />
+        <entry key="..\:/TUSHAR PERSONAL/Kotlin/Projects/RecipeCreator/app/src/main/res/layout/fragment_create_or_edit_recipe.xml" value="0.15307971014492755" />
+        <entry key="..\:/TUSHAR PERSONAL/Kotlin/Projects/RecipeCreator/app/src/main/res/layout/fragment_view_recipes.xml" value="0.15307971014492755" />
+        <entry key="..\:/TUSHAR PERSONAL/Kotlin/Projects/RecipeCreator/app/src/main/res/layout/item_list_view.xml" value="0.15307971014492755" />
       </map>
     </option>
   </component>

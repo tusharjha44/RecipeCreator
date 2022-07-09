@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Recipe Creator</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_recipe_image">Add Recipe Image</string>
+    <string name="title">Title</string>
+    <string name="category">Category</string>
+    <string name="recipe">Recipes</string>
+    <string name="add_dish">Add Dish</string>
+    <string name="create_recipe">Create Recipe</string>
+    <string name="no_dishes_added_yet">No Dishes Added yet</string>
+    <string name="display_image_description">Display Image</string>
+    <string name="create_new_recipe_description">Create New Recipe</string>
 </resources>
