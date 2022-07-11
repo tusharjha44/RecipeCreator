@@ -10,4 +10,5 @@
     <string name="no_dishes_added_yet">No Dishes Added yet</string>
     <string name="display_image_description">Display Image</string>
     <string name="create_new_recipe_description">Create New Recipe</string>
+    <string name="please_wait">Please Wait</string>
 </resources>
