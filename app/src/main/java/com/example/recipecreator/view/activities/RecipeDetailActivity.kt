@@ -10,7 +10,7 @@ import com.example.recipecreator.model.Recipe
 
 class RecipeDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRecipeDetailBinding
-    private  lateinit var recipe: Recipe
+    private lateinit var recipe: Recipe
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRecipeDetailBinding.inflate(layoutInflater)
@@ -20,8 +20,8 @@ class RecipeDetailActivity : AppCompatActivity() {
         loadRecipeData()
 
         binding.fabEdit.setOnClickListener {
-            val i = Intent(this,CreateRecipeActivity::class.java)
-            i.putExtra("RECIPE",recipe)
+            val i = Intent(this, CreateOrEditRecipeActivity::class.java)
+            i.putExtra("RECIPE", recipe)
             startActivity(i)
         }
 
@@ -30,15 +30,15 @@ class RecipeDetailActivity : AppCompatActivity() {
     private fun loadRecipeData() {
         recipe = intent.getParcelableExtra("recipe") ?: return
 
-            binding.tvRecipeTitle.text = recipe.title
-            binding.tvRecipeCategoryText.text = recipe.category
-            binding.tvRecipesText.text = recipe.recipeDetail
-            Glide
-                .with(this)
-                .load(recipe.image)
-                .centerCrop()
-                .placeholder(R.drawable.ic_downloading)
-                .into(binding.ivRecipeImage)
+        binding.tvRecipeTitle.text = recipe.title
+        binding.tvRecipeCategoryText.text = recipe.category
+        binding.tvRecipesText.text = recipe.recipeDetail
+        Glide
+            .with(this)
+            .load(recipe.image)
+            .centerCrop()
+            .placeholder(R.drawable.ic_downloading)
+            .into(binding.ivRecipeImage)
 
     }
 

@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/recipe_image_background"
     app:cardCornerRadius="8dp"
     app:cardElevation="8dp"
-    android:background="@color/recipe_image_background"
     app:cardUseCompatPadding="true">
 
     <LinearLayout

@@ -17,7 +17,7 @@ class ViewRecipesActivity : AppCompatActivity() {
     private lateinit var mAdapter: RecipeAdapter
     private lateinit var recipeList: ArrayList<Recipe>
     private lateinit var db: FirebaseFirestore
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityViewRecipesBinding.inflate(layoutInflater)
@@ -27,9 +27,9 @@ class ViewRecipesActivity : AppCompatActivity() {
         supportActionBar?.title = getString(R.string.recipe)
 
         binding.fabAddRecipe.setOnClickListener {
-            startActivity(Intent(this, CreateRecipeActivity::class.java))
+            startActivity(Intent(this, CreateOrEditRecipeActivity::class.java))
         }
-        
+
         db = FirebaseFirestore.getInstance()
         eventChangeListener()
         recipeList = ArrayList()
@@ -39,14 +39,14 @@ class ViewRecipesActivity : AppCompatActivity() {
 
     private fun eventChangeListener() {
 
-        db.collection("recipes").addSnapshotListener(object : EventListener<QuerySnapshot>{
+        db.collection("recipes").addSnapshotListener(object : EventListener<QuerySnapshot> {
             override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
-                if(error != null){
-                    Log.e("Firestore Error",error.message.toString())
+                if (error != null) {
+                    Log.e("Firestore Error", error.message.toString())
                     return
                 }
-                for(dc : DocumentChange in value?.documentChanges!!){
-                    if(dc.type == DocumentChange.Type.ADDED){
+                for (dc: DocumentChange in value?.documentChanges!!) {
+                    if (dc.type == DocumentChange.Type.ADDED) {
                         recipeList.add(dc.document.toObject(Recipe::class.java))
                     }
                 }
@@ -62,10 +62,10 @@ class ViewRecipesActivity : AppCompatActivity() {
             setHasFixedSize(true)
             mAdapter = RecipeAdapter(recipeList)
             adapter = mAdapter
-            layoutManager = GridLayoutManager(this@ViewRecipesActivity,2)
+            layoutManager = GridLayoutManager(this@ViewRecipesActivity, 2)
             mAdapter.onItemClickListener = {
                 val intent = Intent(this@ViewRecipesActivity, RecipeDetailActivity::class.java)
-                intent.putExtra("recipe",it)
+                intent.putExtra("recipe", it)
                 startActivity(intent)
             }
         }

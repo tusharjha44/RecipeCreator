@@ -4,7 +4,6 @@
     package="com.example.recipecreator">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -32,7 +31,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.activities.CreateRecipeActivity"
+            android:name=".view.activities.CreateOrEditRecipeActivity"
             android:exported="false"
             android:theme="@style/Theme.RecipeCreator.NoActionBar" />
     </application>

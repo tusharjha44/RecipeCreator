@@ -13,7 +13,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.example.recipecreator.R
-import com.example.recipecreator.databinding.ActivityCreateRecipeBinding
+import com.example.recipecreator.databinding.ActivityCreateOrEditRecipeBinding
 import com.example.recipecreator.databinding.DialogProgressBinding
 import com.example.recipecreator.model.Recipe
 import com.google.firebase.firestore.FirebaseFirestore
@@ -22,7 +22,7 @@ import com.google.firebase.storage.StorageReference
 import java.io.IOException
 
 @Suppress("DEPRECATION")
-class CreateRecipeActivity : AppCompatActivity() {
+class CreateOrEditRecipeActivity : AppCompatActivity() {
 
     companion object {
         private const val PICK_IMAGE_REQUEST_CODE = 100
@@ -31,29 +31,29 @@ class CreateRecipeActivity : AppCompatActivity() {
 
     private lateinit var mProgressDialog: Dialog
     private lateinit var firebaseFirestore: FirebaseFirestore
-    private lateinit var binding: ActivityCreateRecipeBinding
+    private lateinit var binding: ActivityCreateOrEditRecipeBinding
     private var imageUri: Uri? = null
     private var recipeImageUri: String = ""
     private val editRecipe by lazy {
-         intent.getParcelableExtra<Recipe>("RECIPE")
+        intent.getParcelableExtra<Recipe>("RECIPE")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityCreateRecipeBinding.inflate(layoutInflater)
+        binding = ActivityCreateOrEditRecipeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         firebaseFirestore = FirebaseFirestore.getInstance()
         setUpActionBar()
 
         binding.ivRecipeImage.setOnClickListener {
-            if(ContextCompat.checkSelfPermission(
+            if (ContextCompat.checkSelfPermission(
                     this,
                     android.Manifest.permission.CAMERA
-                ) == PackageManager.PERMISSION_GRANTED){
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
                 showImageChooser()
-            }
-            else{
+            } else {
                 ActivityCompat.requestPermissions(
                     this,
                     arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),
@@ -63,20 +63,20 @@ class CreateRecipeActivity : AppCompatActivity() {
         }
 
         binding.btnAddDish.setOnClickListener {
-            if(imageUri!=null){
+            if (imageUri != null) {
                 uploadRecipeImage()
-            }else{
+            } else {
                 showProgressDialog(resources.getString(R.string.please_wait))
                 saveRecipeToFirestore()
             }
         }
 
-        editRecipe?.let { fillFields(it) }
+        editRecipe?.let { updateRecipe(it) }
 
 
     }
 
-    private fun fillFields(editRecipe : Recipe) {
+    private fun updateRecipe(editRecipe: Recipe) {
 
         supportActionBar?.title = getString(R.string.edit_recipe)
         binding.etTitle.setText(editRecipe.title)
@@ -95,11 +95,11 @@ class CreateRecipeActivity : AppCompatActivity() {
     }
 
     private fun showImageChooser() {
-            val galleryIntent = Intent(
-                Intent.ACTION_PICK,
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-            )
-            startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST_CODE)
+        val galleryIntent = Intent(
+            Intent.ACTION_PICK,
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        )
+        startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST_CODE)
     }
 
     @Deprecated("Deprecated in Java")
@@ -128,7 +128,7 @@ class CreateRecipeActivity : AppCompatActivity() {
         val category = binding.etCategory.text.toString()
         val recipeDetail = binding.etRecipe.text.toString()
 
-        val recipe: HashMap<String,Any> = hashMapOf(
+        val recipe: HashMap<String, Any> = hashMapOf(
             "title" to title,
             "category" to category,
             "recipeDetail" to recipeDetail,
@@ -153,7 +153,7 @@ class CreateRecipeActivity : AppCompatActivity() {
     private fun uploadRecipeImage() {
 
         showProgressDialog(resources.getString(R.string.please_wait))
-        if(imageUri != null){
+        if (imageUri != null) {
             val sRef: StorageReference = FirebaseStorage.getInstance()
                 .reference.child(
                     "RECIPE_IMAGE" + System.currentTimeMillis()
@@ -178,7 +178,6 @@ class CreateRecipeActivity : AppCompatActivity() {
         }
 
 
-
     }
 
     private fun getExtension(uri: Uri?): String? {
@@ -186,16 +185,16 @@ class CreateRecipeActivity : AppCompatActivity() {
     }
 
     private fun setUpActionBar() {
-        setSupportActionBar(binding.tbCreateRecipe)
+        setSupportActionBar(binding.tbCreateOrEditRecipe)
 
         supportActionBar?.title = getString(R.string.create_recipe)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_back_arrow)
 
-        binding.tbCreateRecipe.setNavigationOnClickListener { onBackPressed() }
+        binding.tbCreateOrEditRecipe.setNavigationOnClickListener { onBackPressed() }
     }
 
-    private fun showProgressDialog(text:String){
+    private fun showProgressDialog(text: String) {
         mProgressDialog = Dialog(this)
         val mBinding: DialogProgressBinding = DialogProgressBinding.inflate(layoutInflater)
         mProgressDialog.setContentView(mBinding.root)
@@ -210,11 +209,10 @@ class CreateRecipeActivity : AppCompatActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if(requestCode == READ_STORAGE_PERMISSION_CODE){
-            if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+        if (requestCode == READ_STORAGE_PERMISSION_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 showImageChooser()
-            }
-            else{
+            } else {
                 Toast.makeText(
                     this,
                     "Oops, you just denied Storage permissions",
@@ -224,7 +222,7 @@ class CreateRecipeActivity : AppCompatActivity() {
         }
     }
 
-    private fun hideProgressDialog(){
+    private fun hideProgressDialog() {
         mProgressDialog.dismiss()
     }
 }

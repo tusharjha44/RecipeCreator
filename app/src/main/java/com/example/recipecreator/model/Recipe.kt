@@ -11,4 +11,4 @@ data class Recipe
     var title: String? = "",
     var category: String? = "",
     var recipeDetail: String? = ""
-    ): Parcelable
+) : Parcelable
