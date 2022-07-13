@@ -18,11 +18,6 @@ class RecipeDetailActivity : AppCompatActivity() {
         setUpActionBar()
         loadRecipeData()
 
-        binding.fabEdit.setOnClickListener {
-            intent = Intent(this, CreateRecipeActivity::class.java)
-            intent.putExtra("EDIT_RECIPE",111)
-            startActivity(intent)
-        }
     }
 
     private fun loadRecipeData() {
@@ -35,7 +30,7 @@ class RecipeDetailActivity : AppCompatActivity() {
                 .with(this)
                 .load(recipe.image)
                 .centerCrop()
-                .placeholder(R.drawable.ic_baseline_error_24)
+                .placeholder(R.drawable.ic_downloading)
                 .into(binding.ivRecipeImage)
         }
     }

@@ -8,7 +8,8 @@ import com.example.recipecreator.R
 import com.example.recipecreator.databinding.ItemListViewBinding
 import com.example.recipecreator.model.Recipe
 
-class RecipeAdapter( private val list: ArrayList<Recipe>) :
+
+class RecipeAdapter(private val list: ArrayList<Recipe>) :
     RecyclerView.Adapter<MyViewHolder>() {
 
     var onItemClickListener: ((Recipe) -> Unit)? = null
@@ -50,5 +51,4 @@ class MyViewHolder(private val binding: ItemListViewBinding) :
 
     }
 }
-
 
