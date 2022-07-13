@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide
 import com.example.recipecreator.R
 import com.example.recipecreator.databinding.ActivityCreateRecipeBinding
 import com.example.recipecreator.databinding.DialogProgressBinding
+import com.example.recipecreator.model.Recipe
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -33,6 +34,9 @@ class CreateRecipeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCreateRecipeBinding
     private var imageUri: Uri? = null
     private var recipeImageUri: String = ""
+    private val editRecipe by lazy {
+         intent.getParcelableExtra<Recipe>("RECIPE")
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,6 +70,27 @@ class CreateRecipeActivity : AppCompatActivity() {
                 saveRecipeToFirestore()
             }
         }
+
+        editRecipe?.let { fillFields(it) }
+
+
+    }
+
+    private fun fillFields(editRecipe : Recipe) {
+
+        supportActionBar?.title = getString(R.string.edit_recipe)
+        binding.etTitle.setText(editRecipe.title)
+        binding.etCategory.setText(editRecipe.category)
+        binding.etRecipe.setText(editRecipe.recipeDetail)
+
+        Glide.with(this)
+            .load(editRecipe.image)
+            .centerCrop()
+            .placeholder(R.drawable.ic_downloading)
+            .into(binding.ivRecipeImage)
+
+        recipeImageUri = editRecipe.image.toString()
+        binding.btnAddDish.text = getString(R.string.edit_recipe)
 
     }
 
@@ -115,16 +140,14 @@ class CreateRecipeActivity : AppCompatActivity() {
             .set(recipe)
             .addOnSuccessListener {
                 hideProgressDialog()
-                Toast.makeText(this,"Recipe Added Successfully",Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, ViewRecipesActivity::class.java))
             }
             .addOnFailureListener {
                 Toast.makeText(
                     this,
-                    "FAILED to add the recipe", Toast.LENGTH_SHORT
+                    "FAILED to add/edit the recipe", Toast.LENGTH_SHORT
                 ).show()
             }
-
     }
 
     private fun uploadRecipeImage() {

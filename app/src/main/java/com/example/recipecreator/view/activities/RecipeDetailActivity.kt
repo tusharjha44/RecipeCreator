@@ -10,6 +10,7 @@ import com.example.recipecreator.model.Recipe
 
 class RecipeDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRecipeDetailBinding
+    private  lateinit var recipe: Recipe
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRecipeDetailBinding.inflate(layoutInflater)
@@ -18,11 +19,17 @@ class RecipeDetailActivity : AppCompatActivity() {
         setUpActionBar()
         loadRecipeData()
 
+        binding.fabEdit.setOnClickListener {
+            val i = Intent(this,CreateRecipeActivity::class.java)
+            i.putExtra("RECIPE",recipe)
+            startActivity(i)
+        }
+
     }
 
     private fun loadRecipeData() {
-        val recipe = intent.getParcelableExtra<Recipe>("recipe")
-        if(recipe != null){
+        recipe = intent.getParcelableExtra("recipe") ?: return
+
             binding.tvRecipeTitle.text = recipe.title
             binding.tvRecipeCategoryText.text = recipe.category
             binding.tvRecipesText.text = recipe.recipeDetail
@@ -32,7 +39,7 @@ class RecipeDetailActivity : AppCompatActivity() {
                 .centerCrop()
                 .placeholder(R.drawable.ic_downloading)
                 .into(binding.ivRecipeImage)
-        }
+
     }
 
     private fun setUpActionBar() {

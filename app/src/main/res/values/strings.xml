@@ -15,4 +15,5 @@
     <string name="edit_activity">Edit Activity</string>
     <string name="recipe__">Recipe Details:</string>
     <string name="category__">Category:</string>
+    <string name="edit_recipe">Edit Recipe</string>
 </resources>
