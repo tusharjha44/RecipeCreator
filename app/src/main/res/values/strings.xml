@@ -11,4 +11,8 @@
     <string name="display_image_description">Display Image</string>
     <string name="create_new_recipe_description">Create New Recipe</string>
     <string name="please_wait">Please Wait</string>
+    <string name="recipe_detail">Recipe Details</string>
+    <string name="edit_activity">Edit Activity</string>
+    <string name="recipe__">Recipe Details:</string>
+    <string name="category__">Category:</string>
 </resources>

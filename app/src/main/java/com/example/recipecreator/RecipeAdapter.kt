@@ -7,7 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.recipecreator.databinding.ItemListViewBinding
 
-class RecipeAdapter(private val context: Context,private val list: ArrayList<Recipe>): RecyclerView.Adapter<MyViewHolder>() {
+class RecipeAdapter(private val context: Context, private val list: ArrayList<Recipe>) :
+    RecyclerView.Adapter<MyViewHolder>() {
+
+    var onItemClickListener: ((Recipe) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding = ItemListViewBinding.inflate(
             LayoutInflater.from(parent.context),
@@ -18,17 +22,10 @@ class RecipeAdapter(private val context: Context,private val list: ArrayList<Rec
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        with(holder){
-            with(list[position]){
-                Glide
-                    .with(context)
-                    .load(this.image)
-                    .centerCrop()
-                    .placeholder(R.drawable.ic_baseline_error_24)
-                    .into(binding.ivRecipeImage)
-
-                binding.tvRecipeTitle.text = this.title
-            }
+        val recipe = list[position]
+        holder.bind(recipe)
+        holder.itemView.setOnClickListener {
+            onItemClickListener?.invoke(recipe)
         }
     }
 
@@ -37,4 +34,20 @@ class RecipeAdapter(private val context: Context,private val list: ArrayList<Rec
     }
 }
 
-class MyViewHolder(val binding: ItemListViewBinding): RecyclerView.ViewHolder(binding.root)
+class MyViewHolder(private val binding: ItemListViewBinding) :
+    RecyclerView.ViewHolder(binding.root) {
+    fun bind(recipe: Recipe) {
+        Glide
+            .with(binding.ivRecipeImage)
+            .load(recipe.image)
+            .centerCrop()
+            .placeholder(R.drawable.ic_downloading)
+            .into(binding.ivRecipeImage)
+
+        binding.tvRecipeTitle.text = recipe.title
+
+
+    }
+}
+
+

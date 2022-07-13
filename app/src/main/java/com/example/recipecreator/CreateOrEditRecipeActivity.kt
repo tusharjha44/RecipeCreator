@@ -86,7 +86,7 @@ class CreateOrEditRecipeActivity : AppCompatActivity() {
             try {
                 Glide.with(this).load(imageUri)
                     .centerCrop()
-                    .placeholder(R.drawable.ic_baseline_error_24)
+                    .placeholder(R.drawable.ic_downloading)
                     .into(binding.ivRecipeImage)
             } catch (e: IOException) {
                 e.printStackTrace()

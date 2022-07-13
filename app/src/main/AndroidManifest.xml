@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.recipecreator">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -17,6 +17,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RecipeCreator"
         tools:targetApi="31">
+        <activity
+            android:name=".RecipeDetailActivity"
+            android:exported="false"
+            android:theme="@style/Theme.RecipeCreator.NoActionBar"/>
         <activity
             android:name=".ViewRecipesActivity"
             android:exported="true"
@@ -30,11 +34,11 @@
         <activity
             android:name=".CreateOrEditRecipeActivity"
             android:exported="false"
-            android:theme="@style/Theme.RecipeCreator.NoActionBar"/>
+            android:theme="@style/Theme.RecipeCreator.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:exported="false"
-            android:theme="@style/Theme.RecipeCreator.NoActionBar"/>
+            android:theme="@style/Theme.RecipeCreator.NoActionBar" />
     </application>
 
 </manifest>

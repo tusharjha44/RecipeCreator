@@ -61,6 +61,11 @@ class ViewRecipesActivity : AppCompatActivity() {
             mAdapter = RecipeAdapter(this@ViewRecipesActivity,recipeList)
             adapter = mAdapter
             layoutManager = GridLayoutManager(this@ViewRecipesActivity,2)
+            mAdapter.onItemClickListener = {
+                val intent = Intent(this@ViewRecipesActivity,RecipeDetailActivity::class.java)
+                intent.putExtra("recipe",it)
+                startActivity(intent)
+            }
         }
     }
 
