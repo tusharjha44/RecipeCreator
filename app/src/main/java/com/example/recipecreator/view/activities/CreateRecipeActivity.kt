@@ -1,4 +1,4 @@
-package com.example.recipecreator
+package com.example.recipecreator.view.activities
 
 import android.app.Dialog
 import android.content.Intent
@@ -12,7 +12,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
-import com.example.recipecreator.databinding.ActivityCreateOrEditRecipeBinding
+import com.example.recipecreator.R
+import com.example.recipecreator.databinding.ActivityCreateRecipeBinding
 import com.example.recipecreator.databinding.DialogProgressBinding
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -20,7 +21,7 @@ import com.google.firebase.storage.StorageReference
 import java.io.IOException
 
 @Suppress("DEPRECATION")
-class CreateOrEditRecipeActivity : AppCompatActivity() {
+class CreateRecipeActivity : AppCompatActivity() {
 
     companion object {
         private const val PICK_IMAGE_REQUEST_CODE = 100
@@ -29,13 +30,13 @@ class CreateOrEditRecipeActivity : AppCompatActivity() {
 
     private lateinit var mProgressDialog: Dialog
     private lateinit var firebaseFirestore: FirebaseFirestore
-    private lateinit var binding: ActivityCreateOrEditRecipeBinding
+    private lateinit var binding: ActivityCreateRecipeBinding
     private var imageUri: Uri? = null
     private var recipeImageUri: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityCreateOrEditRecipeBinding.inflate(layoutInflater)
+        binding = ActivityCreateRecipeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         firebaseFirestore = FirebaseFirestore.getInstance()
@@ -162,13 +163,13 @@ class CreateOrEditRecipeActivity : AppCompatActivity() {
     }
 
     private fun setUpActionBar() {
-        setSupportActionBar(binding.tbCreateOrEditRecipe)
+        setSupportActionBar(binding.tbCreateRecipe)
 
         supportActionBar?.title = getString(R.string.create_recipe)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_back_arrow)
 
-        binding.tbCreateOrEditRecipe.setNavigationOnClickListener { onBackPressed() }
+        binding.tbCreateRecipe.setNavigationOnClickListener { onBackPressed() }
     }
 
     private fun showProgressDialog(text:String){

@@ -1,10 +1,12 @@
-package com.example.recipecreator
+package com.example.recipecreator.view.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bumptech.glide.Glide
+import com.example.recipecreator.R
 import com.example.recipecreator.databinding.ActivityRecipeDetailBinding
+import com.example.recipecreator.model.Recipe
 
 class RecipeDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRecipeDetailBinding
@@ -17,7 +19,8 @@ class RecipeDetailActivity : AppCompatActivity() {
         loadRecipeData()
 
         binding.fabEdit.setOnClickListener {
-            intent = Intent(this,CreateOrEditRecipeActivity::class.java)
+            intent = Intent(this, CreateRecipeActivity::class.java)
+            intent.putExtra("EDIT_RECIPE",111)
             startActivity(intent)
         }
     }

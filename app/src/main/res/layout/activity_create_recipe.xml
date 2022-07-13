@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/sv_detail"
     android:layout_height="match_parent"
-    tools:context=".CreateOrEditRecipeActivity">
+    android:fillViewport="true"
+    tools:context=".view.activities.CreateRecipeActivity">
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tb_create_or_edit_recipe"
+        android:id="@+id/tb_create_recipe"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/primary_color"
@@ -27,7 +36,7 @@
         android:contentDescription="@string/add_recipe_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tb_create_or_edit_recipe" />
+        app:layout_constraintTop_toBottomOf="@id/tb_create_recipe" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_title"
@@ -114,3 +123,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/til_recipe" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

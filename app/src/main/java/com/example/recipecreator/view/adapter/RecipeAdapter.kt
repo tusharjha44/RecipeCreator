@@ -1,13 +1,14 @@
-package com.example.recipecreator
+package com.example.recipecreator.view.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.recipecreator.R
 import com.example.recipecreator.databinding.ItemListViewBinding
+import com.example.recipecreator.model.Recipe
 
-class RecipeAdapter(private val context: Context, private val list: ArrayList<Recipe>) :
+class RecipeAdapter( private val list: ArrayList<Recipe>) :
     RecyclerView.Adapter<MyViewHolder>() {
 
     var onItemClickListener: ((Recipe) -> Unit)? = null

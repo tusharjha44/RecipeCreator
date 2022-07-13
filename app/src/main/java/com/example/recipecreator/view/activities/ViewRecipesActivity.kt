@@ -1,12 +1,14 @@
-package com.example.recipecreator
+package com.example.recipecreator.view.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.recipecreator.R
 import com.example.recipecreator.databinding.ActivityViewRecipesBinding
+import com.example.recipecreator.model.Recipe
+import com.example.recipecreator.view.adapter.RecipeAdapter
 import com.google.firebase.firestore.*
 
 class ViewRecipesActivity : AppCompatActivity() {
@@ -25,7 +27,7 @@ class ViewRecipesActivity : AppCompatActivity() {
         supportActionBar?.title = getString(R.string.recipe)
 
         binding.fabAddRecipe.setOnClickListener {
-            startActivity(Intent(this,CreateOrEditRecipeActivity::class.java))
+            startActivity(Intent(this, CreateRecipeActivity::class.java))
         }
         
         db = FirebaseFirestore.getInstance()
@@ -58,11 +60,11 @@ class ViewRecipesActivity : AppCompatActivity() {
     private fun initRecyclerView() {
         binding.rvDishesList.apply {
             setHasFixedSize(true)
-            mAdapter = RecipeAdapter(this@ViewRecipesActivity,recipeList)
+            mAdapter = RecipeAdapter(recipeList)
             adapter = mAdapter
             layoutManager = GridLayoutManager(this@ViewRecipesActivity,2)
             mAdapter.onItemClickListener = {
-                val intent = Intent(this@ViewRecipesActivity,RecipeDetailActivity::class.java)
+                val intent = Intent(this@ViewRecipesActivity, RecipeDetailActivity::class.java)
                 intent.putExtra("recipe",it)
                 startActivity(intent)
             }
